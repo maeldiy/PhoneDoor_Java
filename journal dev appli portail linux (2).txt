@@ -1,0 +1,122 @@
+2013 27 09
+Android difficult to handled : difficult to create a real sticky service; difficult to maintain the wifi connection (of course, difficult for me)
+new architecture on linux OS :
+A java app : push button GUI + UDP listener
+ 1 shell script to be launched by java app, it will launch firefox to get ipcam stream
+base for java app :
+http://java.about.com/od/creatinguserinterfaces/ss/Example-Java-Code-For-Building-A-Simple-Gui-Application.htm
+http://www.ase.md/~aursu/ClientServerThreads.html
+
+2013 28 09
+success in copying and run udpp server from http://www.roseindia.net/java/example/java/net/udp/udp-server.shtml
+failed while modifying it while attempting to start thread alone (GUI interaction) before adding udp client
+http://www.roseindia.net/java/example/java/net/udp/udp-client.shtml
+
+TO save it in GIT as first run !!!!!
+
+2013 29 09
+create UPDServer project and save it on git, success to launch it automatically and make it work on associated arduino port
+
+2013 30 09
+add call_request management
+add launch of browser
+
+2013 05 10
+Create GUI app, void send data to network to be updated
+anyway : both class should be in same project ? having the daemon still alive while closing the GUI could be difficult to manage
+
+2013 07 10
+
+GUI 1.0 "completed" : 5 buttons created with associated UDP message sent while pressed
+TO DO : provide preferences settings to modify GUI size following hardware
+
+
+2013 08 10
+Added sound player to daemon (fix file settings)
+To DO : file path defined in a file, can be edited trough the GUI
+
+2013 09 10
+Added capability to launch the GUI. GUI imported into dameon as an executable JAR file (export from Eclipse).
+issue : imported as "udp_server.jar" instead of "GUI.jar" : to be investigated
+other issue : not launch as front window
+
+2013 11 10
+Added file settings, fixed path to be defined : 1 for windows, 1 for linux
+to do  : add exception management message " could not find file settings"
+mp3 file type very sensitive
+
+2013 12 10
+merge GUI class into phonedoor service projet
+
+2013 13 10
+add GUI size reading insettings
+add linux audio file path settings (not checked probably wrong)
+install swing plugin to add file reading to select audio file
+Jchooser to be implemented for audio file selection
+
+2013 14 10
+add audiofile chooser on the GUI
+the app launches once, then doesn't work. To be fixed
+TO DO : launch web browser on the camera
+
+2013 15 10
+Replace web browser launch by ipcam viewer launch : ip camera trendnet ip422 used for dev requires a login/password which seems to not be manageable
+
+
+<<<<<<< HEAD
+=======
+2013 03 11
+ as the Mp3 player doesn't work outside eclipse, change the code, now getting the error "Unable to handle format: mpeglayer3, 44100.0 Hz,"
+hava to register the plugin, : http://www.oracle.com/technetwork/java/javase/download-137625.html
+§ to be added in the readme :!:!!!!
+solved by installing the JMF plugin
+
+
+>>>>>>> 17abafc7f96e90a7e109594a5d34ee6946d0805e
+2013 16 10
+Add screen saver on/off capabilities (to be optimised)
+to do  : add time out to return to blank screen, add "Do what the fuck you want" license, add automatic closure  of app
+
+2013 17 10
+no need to put a time out : we just need to set the screen saver of the OS ...
+DWTFL added in root directory
+replace ip camera viewer by xeoma, much more friendly 
+
+
+2013 26 10
+add possibility to launch the GUI alone : may not work (unable to lauch 2 process on same port ;-( )
+=> could be solved with http://stackoverflow.com/questions/10069059/is-it-possible-to-run-a-socket-server-and-socket-client-on-the-same-machine
+or with http://stackoverflow.com/questions/9580571/running-a-client-server-prog-on-a-single-system  (with a link to a tutorial)
+the GUI launcher would launch a copy of the GUI
+MAJOR issue : unable to play sound when program is lauchned outside Eclipe IDE
+
+2013 30 10
+Add GUI launcher with the use of local host adress : should work on any platform
+
+<<<<<<< HEAD
+
+2013 03 11
+ as the Mp3 player doesn't work outside eclipse, change the code, now getting the error "Unable to handle format: mpeglayer3, 44100.0 Hz,"
+hava to register the plugin, : http://www.oracle.com/technetwork/java/javase/download-137625.html
+§ to be added in the readme :!:!!!!
+solved by installing the JMF plugin
+add screen saver exit mode  by mouse moving hack
+
+2013 06 11
+JMF was install with "windows performance pack", this means that project is not correctly set and won't work within other platforms ;-(
+to be soved
+
+2013 07 11
+add "recursive" launch by puitng a window closeing window listeneer  : listener ok, need to add a Phonedoordemon java app detection before launching
+
+2013 11 11
+
+Add dispose on close on GUI to keep daemon alive
+use javaexe to register app as a service : http://devwizard.free.fr/html/fr/JavaExe.html
+The use of javaexe does not recognize JMF : the app need to eb cleaned and correctly builkd to in suppport JMF with mp3 plugin
+Need to solve recursive issue : all "GUI" launched twice even if the microcontroller sends only one braoadcast UDP frrame
+
+2013 12 11
+Recursive issue solved : error was withion arduino code
+now closing camera app when closing GUI (but not audio plyer since it s a few second songs), tsted on windows only
+need to implement service
