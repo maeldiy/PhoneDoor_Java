@@ -118,5 +118,13 @@ Need to solve recursive issue : all "GUI" launched twice even if the microcontro
 
 2013 12 11
 Recursive issue solved : error was withion arduino code
-now closing camera app when closing GUI (but not audio plyer since it s a few second songs), tsted on windows only
+now closing camera app when closing GUI (but not audio plyer since it s a few second songs), tested on windows only
 need to implement service
+
+2012 13 11
+javaexe is dedicated to windows only, need a multi OS tool, have to choose between :
+apache common daemon ( http://commons.apache.org/proper/commons-daemon/ and http://www.neilson.co.za/?p=253) and :
+YAJSW ( http://yajsw.sourceforge.net/#mozTocId210483 and http://marcovanduijn.blogspot.fr/2011/08/run-play-framework-application-as.html http://www.youtube.com/watch?v=gX9tGInrIvg
+ http://thegreenoak.blogspot.fr/2012/04/improved-yajsw-startup-script-for.html )
+
+Interesting for building web app : http://marcovanduijn.blogspot.fr/2011/08/run-play-framework-application-as.html

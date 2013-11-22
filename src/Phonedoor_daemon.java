@@ -33,12 +33,17 @@ public class Phonedoor_daemon{
   public String audiofilepath = null;
 
   public String Answer = new String("OKFROMTAB");
-  
+  public static void stop()
+  {
+    // implementation goes here
+  } 
 
   public static void main(String[] args) {
 	  Phonedoor_daemon u = new Phonedoor_daemon();
 	  
   }
+  
+  
   public Phonedoor_daemon(){
 	  new StartThread();
   }
@@ -168,36 +173,3 @@ public class Phonedoor_daemon{
   }
 }
 			 
-		/*	  catch(UnknownHostException ue){					
-				  JOptionPane.showMessageDialog(null,"error eerh" + 
-          ":\n" + ue.getLocalizedMessage());} catch (UnsupportedAudioFileException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			
-		} */
-  
-  		/*	catch (NoPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (CannotRealizeException e) {
-				// TODO Auto-generated catch block
-
-				e.printStackTrace();
-			}
-		  }
-  }*/
-  /*catch(java.net.BindException b){
-		JOptionPane.showMessageDialog(null,"error eeeee" + 
-	             ":\n" + b.getLocalizedMessage());
-  }
-  
-  catch (IOException e){
-	  JOptionPane.showMessageDialog(null,"error aaaa" + 
-	             ":\n" + e.getLocalizedMessage());
-  System.err.println(e);
-  }*/
-  //}
