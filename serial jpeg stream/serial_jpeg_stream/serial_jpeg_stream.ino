@@ -119,7 +119,7 @@ void setup() {
   cam.setImageSize(VC0706_160x120);          // small
   cam.setCompression(0xEE); // overwrite compression settings 00 to FF FF is higher rate
   Serial.println("comp setting");
-  uint8_t b = cam.getCompression();  //Remove because need to debug
+  uint8_t b = cam.getCompression();  
   Serial.println(b);
   
   // You can read the size back from the camera (optional, but maybe useful?)
@@ -184,5 +184,31 @@ void setup() {
 }
 
 void loop() {
+  cam.takePicture();
+  // Get the size of the image (frame) taken  
+  uint16_t jpglen = cam.frameLength();
+  Serial.print("Storing ");
+  Serial.print(jpglen, DEC);  //  Serial.print(jpglen, DEC);
+  Serial.print(" byte image.");
+
+  int32_t time = millis();
+  pinMode(8, OUTPUT);
+  // Read all the data up to # bytes!
+  byte wCount = 0; // For counting # of writes
+  while (jpglen > 0) {
+    // read 32 bytes at a time;
+    uint8_t *buffer;
+    uint8_t bytesToRead = min(64, jpglen); // change 32 to 64 for a speedup but may not work with all setups!
+    buffer = cam.readPicture(bytesToRead);
+   // imgFile.write(buffer, bytesToRead);
+    Serial.write(buffer,bytesToRead);
+    if(++wCount >= 64) { // Every 2K, give a little feedback so it doesn't appear locked up
+     // Serial.print('.');
+      wCount = 0;
+    }
+    //Serial.print("Read ");  Serial.print(bytesToRead, DEC); Serial.println(" bytes");
+    jpglen -= bytesToRead;
+  }
+  cam.resumeVideo();
 }
 
